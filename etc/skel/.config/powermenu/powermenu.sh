@@ -85,6 +85,12 @@ run_cmd() {
 				herbstluftwm)
 					herbstclient quit
 					;;
+				chadwm)
+					pkill chadwm
+					;;
+				ohmychadwm)
+					pkill ohmychadwm
+					;;
 				*)
 					pkill $desktop
 					#loginctl kill-user $USER
