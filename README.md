@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="kiro.jpg" alt="Kiro" width="220" />
+</p>
+
 # edu-powermenu
 
 A graphical rofi-based power menu (logout / shutdown / restart / lock / suspend) for window-manager setups that don't ship a built-in one. Rebrand of the original ArcoLinux powermenu, part of the `~/EDU/` learning series.
