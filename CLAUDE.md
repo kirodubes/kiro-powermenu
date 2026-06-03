@@ -1,4 +1,4 @@
-# CLAUDE.md — edu-powermenu
+# CLAUDE.md — kiro-powermenu
 
 ## Project overview
 
