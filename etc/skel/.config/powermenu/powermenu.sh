@@ -80,7 +80,17 @@ run_cmd() {
 					dkcmd exit
 					;;
 				hyprland)
-					hyprctl dispatch exit
+					# Mirror archlinux-logout's Hyprland exit: uwsm -> graceful stop; Hyprland 0.55+
+					# runs a Lua config where `hyprctl dispatch exit` is rejected (parsed as
+					# hl.dispatch(exit)), so use the hl.dsp.exit() dispatcher. Legacy exit otherwise.
+					ver=$(hyprctl version 2>/dev/null | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1)
+					if systemctl --user is-active --quiet wayland-wm@Hyprland.service; then
+						uwsm stop
+					elif [ -n "$ver" ] && awk -v v="$ver" 'BEGIN{split(v,a,"."); exit !(a[1]>0 || (a[1]==0 && a[2]>=55))}'; then
+						hyprctl dispatch 'hl.dsp.exit()'
+					else
+						hyprctl dispatch exit
+					fi
 					;;
 				herbstluftwm)
 					herbstclient quit
